@@ -15,6 +15,11 @@
         public void Login(string username, string password)
         {
             m_LoggedUserName = m_Authentication.Login(username, password);
+
+            if (m_LoggedUserName == null)
+            {
+                throw new AuthenticationException();
+            }
         }
 
         public int TodaySyns()
