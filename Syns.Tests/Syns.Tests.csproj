@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLoginTests.cs" />
+    <Compile Include="AuthenticationTests.cs" />
+    <Compile Include="Stubs\InMemoryAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TodaySynsTests.cs" />
   </ItemGroup>
@@ -61,5 +63,6 @@
       <Name>Syns</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
