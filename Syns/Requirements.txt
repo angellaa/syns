@@ -1,0 +1,22 @@
+﻿---------------------------
+- HIGH LEVEL REQUIREMENTS -
+---------------------------
+
+MUST: 
+
+ - I want to say what is my syns allowance per day
+ - I want to track of how many syns I used today
+ - I want to know how many syns I have left today
+ - I want to add/remove syns to my count today
+ - I want to add/remove syns to the counter of a previous day
+ - I want all my data to be secure (no one else should be able to read it except me)
+ - I want to have an history of syns usage over time
+ - I want to be able to log my weight loss
+ - I want to know my total weight lost in stones/pounds and kilos
+ - I want to be able to say how much I lost already before starting to use this system
+ - I want to know how many syns on average I can use to lose X pounds in a week?
+
+LIMITATIONS:
+ - A day based on UTC is acceptable as Slimming World is mainly used in UK and Northen Ireland
+
+
