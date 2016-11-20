@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="AuthenticationException.cs" />
-    <Compile Include="IAuthentication.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="ISynsStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

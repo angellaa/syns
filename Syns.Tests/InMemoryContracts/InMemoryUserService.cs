@@ -3,23 +3,31 @@ using System.Linq;
 
 namespace Syns.Tests.InMemoryContracts
 {
-    public class InMemoryAuthentication : IAuthentication
+    public class InMemoryUserService : IUserService
     {
         public readonly Dictionary<string, string> users = new Dictionary<string, string>();
+        private User m_LoggedUser;
 
-        public User Login(string username, string password)
+        public void Login(string username, string password)
         {
             if (users.Keys.Contains(username) && users[username] == password)
             {
-                return new User(username);
+                m_LoggedUser = new User(username);
             }
-
-            return null;
+            else
+            {
+               m_LoggedUser = null;
+            }
         }
 
         public void AddUser(string username, string password)
         {
             users.Add(username, password);
+        }
+
+        public User GetLoggedUser()
+        {
+            return m_LoggedUser;
         }
     }
 }

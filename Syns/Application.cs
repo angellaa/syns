@@ -3,36 +3,30 @@ namespace Syns
 {
     public class Application
     {
-        private readonly IAuthentication m_Authentication;
+        private readonly IUserService m_UserService;
         private readonly ISynsStore m_SynsStore;
-        private User m_LoggedUser;
 
-        public Application(IAuthentication authentication, ISynsStore synsStore)
+        public Application(IUserService userService, ISynsStore synsStore)
         {
-            m_Authentication = authentication;
+            m_UserService = userService;
             m_SynsStore = synsStore;
-        }
-
-        public void Login(string username, string password)
-        {
-            m_LoggedUser = m_Authentication.Login(username, password);
-
-            if (m_LoggedUser == null)
-            {
-                throw new AuthenticationException();
-            }
         }
 
         public decimal TodaySyns()
         {
-            return m_SynsStore.GetTodaySyns(m_LoggedUser);
+            return m_SynsStore.GetTodaySyns(LoggedUser());
         }
 
         public decimal TodaySynsLeft()
         {
-            var synsLeft = m_LoggedUser.SynsAllowance - TodaySyns();
+            var synsLeft = LoggedUser().SynsAllowance - TodaySyns();
 
             return synsLeft > 0 ? synsLeft : 0;
+        }
+
+        private User LoggedUser()
+        {
+            return m_UserService.GetLoggedUser();
         }
     }
 }

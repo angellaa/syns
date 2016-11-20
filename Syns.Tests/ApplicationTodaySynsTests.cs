@@ -9,13 +9,11 @@ namespace Syns.Tests
         public void TodaySyns()
         {
             // Arrange
-            var username = "username@me.com";
-            var password = "password";
-            var user = new User(username);
+            var user = new User("user");
 
-            var authentication = Substitute.For<IAuthentication>();
-            authentication
-                .Login(username, password)
+            var userService = Substitute.For<IUserService>();
+            userService
+                .GetLoggedUser()
                 .Returns(user);
 
             var todaySyns = 13.5m;
@@ -26,13 +24,12 @@ namespace Syns.Tests
                 .Returns(todaySyns);
 
             // Act
-            var application = new Application(authentication, synsStore);
-            application.Login(username, password);
+            var application = new Application(userService, synsStore);
 
             // Assert
             Assert.That(application.TodaySyns, Is.EqualTo(todaySyns));
 
-            authentication.Received(1).Login(username, password);
+            userService.Received(1).GetLoggedUser();
             synsStore.Received(1).GetTodaySyns(user);
         }
 
@@ -42,17 +39,14 @@ namespace Syns.Tests
         public void TodaySynsLeft(decimal synsAllowance, decimal todaySyns, decimal synsLeft)
         {
             // Arrange
-            var username = "username@me.com";
-            var password = "password";
-
-            var user = new User(username)
+            var user = new User("user")
             {
                 SynsAllowance = synsAllowance
             };
 
-            var authentication = Substitute.For<IAuthentication>();
-            authentication
-                .Login(username, password)
+            var userService = Substitute.For<IUserService>();
+            userService
+                .GetLoggedUser()
                 .Returns(user);
 
             var synsStore = Substitute.For<ISynsStore>();
@@ -61,8 +55,7 @@ namespace Syns.Tests
                 .Returns(todaySyns);
 
             // Act
-            var application = new Application(authentication, synsStore);
-            application.Login(username, password);
+            var application = new Application(userService, synsStore);
 
             // Assert
             Assert.That(application.TodaySynsLeft, Is.EqualTo(synsLeft));
