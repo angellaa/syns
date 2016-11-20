@@ -40,10 +40,30 @@ namespace Syns.Tests.ContractTests
         [Test]
         public void AddUserThatAlreadyExist()
         {
-            IUserService userService = CreateUserService();
-            userService.AddUser("user", "password");
+            IUserService userService = ServiceWithUser(Username, Password);
 
-            Assert.Throws<UserServiceException>(() => userService.AddUser("user", "password"));
+            Assert.Throws<UserServiceException>(() => userService.AddUser(Username, Password));
+        }
+
+        [Test]
+        public void SaveUser()
+        {
+            IUserService userService = ServiceWithUser(Username, Password);
+
+            userService.Login(Username, Password);
+
+            var user = userService.GetLoggedUser();
+            user.SynsAllowance = 15m;
+
+            userService.Login(Username, Password);
+
+            AssertUserAreEqual(user, userService.GetLoggedUser());
+        }
+
+        private void AssertUserAreEqual(User expected, User actual)
+        {
+            Assert.That(actual, Is.EqualTo(expected));
+            Assert.That(actual.SynsAllowance, Is.EqualTo(expected.SynsAllowance));
         }
 
         private IUserService ServiceWithUser(string username, string password)
