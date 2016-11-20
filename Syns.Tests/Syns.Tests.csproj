@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ApplicationLoginTests.cs" />
     <Compile Include="AuthenticationTests.cs" />
+    <Compile Include="Contracts\IAuthenticationContractTests.cs" />
     <Compile Include="Stubs\InMemoryAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TodaySynsTests.cs" />

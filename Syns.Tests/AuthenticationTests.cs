@@ -1,51 +1,32 @@
-﻿using System;
-using NUnit.Framework;
+﻿using Syns.Tests.ContractTests;
 using Syns.Tests.Stubs;
 
 namespace Syns.Tests
 {
-    public class AuthenticationTests
+    public class AuthenticationTests : IAuthenticationContractTests
     {
-        [Test]
-        public void Success()
+        protected override IAuthentication AuthenticationWithUser(string username, string password)
         {
-            var username = "user@me.com";
-            var password = "password";
-
             var authentication = new InMemoryAuthentication();
-            authentication.WithUser(username, password);
+            authentication.AddUser(username, password);
 
-            var loggedUser = authentication.Login(username, password);
-
-            Assert.That(loggedUser, Is.EqualTo(username));
+            return authentication;
         }
 
-        [Test]
-        public void UserDoesNotExist()
+        protected override IAuthentication AuthenticationWithoutUser(string username)
         {
-            var username = "user@me.com";
-            var password = "password";
-
             var authentication = new InMemoryAuthentication();
-            authentication.WithoutUser(username);
+            authentication.AddUser("Different " + username, "irrelevant passowrd");
 
-            var loggedUser = authentication.Login(username, password);
-
-            Assert.IsNull(loggedUser);
+            return authentication;
         }
 
-        [Test]
-        public void UserExistButPassowordIsWrong()
+        protected override IAuthentication AuthenticationWithUserButDifferentPassword(string username, string password)
         {
-            var username = "user@me.com";
-            var password = "password";
-
             var authentication = new InMemoryAuthentication();
-            authentication.WithUserButDifferentPassword(username, password);
+            authentication.AddUser(username, "Different " + password);
 
-            var loggedUser = authentication.Login(username, password);
-
-            Assert.IsNull(loggedUser);
+            return authentication;
         }
     }
 }
