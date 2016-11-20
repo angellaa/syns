@@ -12,8 +12,7 @@ namespace Syns.Tests.ContractTests
         {
             IUserService userService = ServiceWithUser(Username, Password);
 
-            userService.Login(Username, Password);
-
+            Assert.IsTrue(userService.Login(Username, Password));
             Assert.That(userService.GetLoggedUser(), Is.EqualTo(new User(Username)));
         }
 
@@ -34,8 +33,7 @@ namespace Syns.Tests.ContractTests
             IUserService userService = CreateUserService();
             userService.RegisterUser("Different " + Username, "irrelevant passowrd");
 
-            userService.Login(Username, Password);
-
+            Assert.IsFalse(userService.Login(Username, Password));
             Assert.IsNull(userService.GetLoggedUser());
         }
 
@@ -45,8 +43,7 @@ namespace Syns.Tests.ContractTests
             IUserService userService = CreateUserService();
             userService.RegisterUser(Username, "Different " + Password);
 
-            userService.Login(Username, Password);
-
+            Assert.IsFalse(userService.Login(Username, Password));
             Assert.IsNull(userService.GetLoggedUser());
         }
 

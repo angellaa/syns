@@ -8,16 +8,15 @@ namespace Syns.Tests.InMemoryContracts
         private readonly Dictionary<string, UserWithPassword> savedUsers = new Dictionary<string, UserWithPassword>();
         private string m_LoggedUserName;
 
-        public void Login(string username, string password)
+        public bool Login(string username, string password)
         {
             if (UserExists(username) && savedUsers[username].Password == password)
             {
                 m_LoggedUserName = username;
+                return true;
             }
-            else
-            {
-                m_LoggedUserName = null;
-            }
+
+            return false;
         }
 
         public void Logout()
