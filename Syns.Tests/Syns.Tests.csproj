@@ -49,11 +49,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLoginTests.cs" />
-    <Compile Include="AuthenticationTests.cs" />
-    <Compile Include="Contracts\IAuthenticationContractTests.cs" />
-    <Compile Include="Stubs\InMemoryAuthentication.cs" />
+    <Compile Include="InMemoryContractsTests\InMemoryAuthenticationTests.cs" />
+    <Compile Include="InMemoryContractsTests\InMemorySynsStoreTests.cs" />
+    <Compile Include="InMemoryContracts\InMemorySynsStore.cs" />
+    <Compile Include="ContractsTests\ISynsStoreContractTests.cs" />
+    <Compile Include="ContractsTests\IAuthenticationContractTests.cs" />
+    <Compile Include="InMemoryContracts\InMemoryAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TodaySynsTests.cs" />
+    <Compile Include="ApplicationTodaySynsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Syns.Tests
 {
-    public class TodaySynsTests
+    public class ApplicationTodaySynsTests
     {
         [Test]
         public void TodaySyns()

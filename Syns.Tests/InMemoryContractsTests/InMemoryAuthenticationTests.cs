@@ -1,9 +1,9 @@
 ﻿using Syns.Tests.ContractTests;
-using Syns.Tests.Stubs;
+using Syns.Tests.InMemoryContracts;
 
-namespace Syns.Tests
+namespace Syns.Tests.InMemoryContractsTests
 {
-    public class AuthenticationTests : IAuthenticationContractTests
+    public class InMemoryAuthenticationTests : IAuthenticationContractTests
     {
         protected override IAuthentication AuthenticationWithUser(string username, string password)
         {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Syns.Tests.Stubs
+namespace Syns.Tests.InMemoryContracts
 {
     public class InMemoryAuthentication : IAuthentication
     {

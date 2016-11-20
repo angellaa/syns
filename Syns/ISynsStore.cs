@@ -2,6 +2,6 @@ namespace Syns
 {
     public interface ISynsStore
     {
-        decimal GetTodaySyns(User username);
+        decimal GetTodaySyns(User user);
     }
 }
