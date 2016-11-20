@@ -20,7 +20,7 @@ namespace Syns.Tests.InMemoryContracts
             }
         }
 
-        public void AddUser(string username, string password)
+        public void RegisterUser(string username, string password)
         {
             if (UserExists(username))
             {

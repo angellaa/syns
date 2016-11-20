@@ -21,7 +21,7 @@ namespace Syns.Tests.ContractTests
         public void LoginWhenUserDoesNotExist()
         {
             IUserService userService = CreateUserService();
-            userService.AddUser("Different " + Username, "irrelevant passowrd");
+            userService.RegisterUser("Different " + Username, "irrelevant passowrd");
 
             userService.Login(Username, Password);
 
@@ -32,7 +32,7 @@ namespace Syns.Tests.ContractTests
         public void LoginWithWrongPassword()
         {
             IUserService userService = CreateUserService();
-            userService.AddUser(Username, "Different " + Password);
+            userService.RegisterUser(Username, "Different " + Password);
 
             userService.Login(Username, Password);
 
@@ -40,11 +40,11 @@ namespace Syns.Tests.ContractTests
         }
 
         [Test]
-        public void AddUserThatAlreadyExist()
+        public void RegisterUserThatAlreadyExist()
         {
             IUserService userService = ServiceWithUser(Username, Password);
 
-            Assert.Throws<UserServiceException>(() => userService.AddUser(Username, Password));
+            Assert.Throws<UserServiceException>(() => userService.RegisterUser(Username, Password));
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace Syns.Tests.ContractTests
         private IUserService ServiceWithUser(string username, string password)
         {
             var userService = CreateUserService();
-            userService.AddUser(username, password);
+            userService.RegisterUser(username, password);
 
             return userService;
         }
