@@ -18,6 +18,17 @@ namespace Syns.Tests.ContractTests
         }
 
         [Test]
+        public void Logout()
+        {
+            IUserService userService = ServiceWithUser(Username, Password);
+
+            userService.Login(Username, Password);
+            userService.Logout();
+
+            Assert.IsNull(userService.GetLoggedUser());
+        }
+
+        [Test]
         public void LoginWhenUserDoesNotExist()
         {
             IUserService userService = CreateUserService();

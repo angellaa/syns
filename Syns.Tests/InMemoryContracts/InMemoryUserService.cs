@@ -20,6 +20,11 @@ namespace Syns.Tests.InMemoryContracts
             }
         }
 
+        public void Logout()
+        {
+            m_LoggedUserName = null;
+        }
+
         public void RegisterUser(string username, string password)
         {
             if (UserExists(username))
