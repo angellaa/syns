@@ -22,7 +22,7 @@
             }
         }
 
-        public int TodaySyns()
+        public decimal TodaySyns()
         {
             return m_SynsStore.GetTodaySyns(m_LoggedUserName);
         }

@@ -17,7 +17,7 @@ namespace Syns.Tests
                 .Login(username, password)
                 .Returns(username);
 
-            var todaySyns = 13;
+            var todaySyns = 13.5m;
 
             var synsStore = Substitute.For<ISynsStore>();
             synsStore

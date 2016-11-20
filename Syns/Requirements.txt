@@ -2,10 +2,12 @@
 - HIGH LEVEL REQUIREMENTS -
 ---------------------------
 
+DONE:
+ - I want to track of how many syns I used today
+
 MUST: 
 
  - I want to say what is my syns allowance per day
- - I want to track of how many syns I used today
  - I want to know how many syns I have left today
  - I want to add/remove syns to my count today
  - I want to add/remove syns to the counter of a previous day
