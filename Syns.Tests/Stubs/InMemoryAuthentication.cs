@@ -7,11 +7,11 @@ namespace Syns.Tests.Stubs
     {
         public readonly Dictionary<string, string> users = new Dictionary<string, string>();
 
-        public string Login(string username, string password)
+        public User Login(string username, string password)
         {
             if (users.Keys.Contains(username) && users[username] == password)
             {
-                return username;
+                return new User(username);
             }
 
             return null;

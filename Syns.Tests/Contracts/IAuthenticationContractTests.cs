@@ -14,7 +14,7 @@ namespace Syns.Tests.ContractTests
 
             var loggedUser = authentication.Login(username, password);
 
-            Assert.That(loggedUser, Is.EqualTo(username));
+            Assert.That(loggedUser, Is.EqualTo(new User(username)));
         }
 
         [Test]

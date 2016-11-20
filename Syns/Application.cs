@@ -6,7 +6,7 @@ namespace Syns
     {
         private readonly IAuthentication m_Authentication;
         private readonly ISynsStore m_SynsStore;
-        private string m_LoggedUserName;
+        private User m_LoggedUser;
         private decimal m_SynsAllowance;
 
         public Application(IAuthentication authentication, ISynsStore synsStore)
@@ -17,9 +17,9 @@ namespace Syns
 
         public void Login(string username, string password)
         {
-            m_LoggedUserName = m_Authentication.Login(username, password);
+            m_LoggedUser = m_Authentication.Login(username, password);
 
-            if (m_LoggedUserName == null)
+            if (m_LoggedUser == null)
             {
                 throw new AuthenticationException();
             }
@@ -27,7 +27,7 @@ namespace Syns
 
         public decimal TodaySyns()
         {
-            return m_SynsStore.GetTodaySyns(m_LoggedUserName);
+            return m_SynsStore.GetTodaySyns(m_LoggedUser);
         }
 
         public void SetSynsAllowance(decimal synsAllowance)

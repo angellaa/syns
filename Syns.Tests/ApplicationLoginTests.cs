@@ -14,7 +14,7 @@ namespace Syns.Tests
             var authentication = Substitute.For<IAuthentication>();
             authentication
                 .Login(username, password)
-                .Returns((string)null);
+                .Returns((User)null);
 
             var synsStore = Substitute.For<ISynsStore>();
 

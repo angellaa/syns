@@ -11,17 +11,18 @@ namespace Syns.Tests
             // Arrange
             var username = "username@me.com";
             var password = "password";
+            var user = new User(username);
 
             var authentication = Substitute.For<IAuthentication>();
             authentication
                 .Login(username, password)
-                .Returns(username);
+                .Returns(user);
 
             var todaySyns = 13.5m;
 
             var synsStore = Substitute.For<ISynsStore>();
             synsStore
-                .GetTodaySyns(username)
+                .GetTodaySyns(user)
                 .Returns(todaySyns);
 
             // Act
@@ -32,7 +33,7 @@ namespace Syns.Tests
             Assert.That(application.TodaySyns, Is.EqualTo(todaySyns));
 
             authentication.Received(1).Login(username, password);
-            synsStore.Received(1).GetTodaySyns(username);
+            synsStore.Received(1).GetTodaySyns(user);
         }
 
         [TestCase(25, 10.5, 14.5)]
@@ -43,15 +44,16 @@ namespace Syns.Tests
             // Arrange
             var username = "username@me.com";
             var password = "password";
+            var user = new User(username);
 
             var authentication = Substitute.For<IAuthentication>();
             authentication
                 .Login(username, password)
-                .Returns(username);
+                .Returns(user);
 
             var synsStore = Substitute.For<ISynsStore>();
             synsStore
-                .GetTodaySyns(username)
+                .GetTodaySyns(user)
                 .Returns(todaySyns);
 
             // Act
