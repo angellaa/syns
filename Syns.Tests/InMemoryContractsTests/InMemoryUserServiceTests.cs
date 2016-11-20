@@ -3,7 +3,7 @@ using Syns.Tests.InMemoryContracts;
 
 namespace Syns.Tests.InMemoryContractsTests
 {
-    public class InMemoryUserTests : IUserContractTests
+    public class InMemoryUserServiceTests : IUserServiceContractTests
     {
         protected override IUserService ServiceWithUser(string username, string password)
         {
