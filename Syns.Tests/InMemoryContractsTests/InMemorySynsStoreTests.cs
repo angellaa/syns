@@ -5,12 +5,9 @@ namespace Syns.Tests.InMemoryContractsTests
 {
     public class InMemorySynsStoreTests : ISynsStoreContractTests
     {
-        protected override ISynsStore SynsStore(User user, decimal todaySyns)
+        protected override ISynsStore SynsStore()
         {
-            var synsStore = new InMemorySynsStore();
-            synsStore.SetTodaySyns(user, todaySyns);
-
-            return synsStore;
+            return new InMemorySynsStore();
         }
     }
 }

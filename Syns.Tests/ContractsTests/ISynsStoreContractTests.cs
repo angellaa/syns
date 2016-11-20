@@ -10,12 +10,12 @@ namespace Syns.Tests.ContractTests
             var user = new User("user");
             var todaySyns = 12.5m;
 
-            ISynsStore synsStore = SynsStore(user, todaySyns);
+            ISynsStore synsStore = SynsStore();
+            synsStore.SetTodaySyns(user, todaySyns);
 
             Assert.That(synsStore.GetTodaySyns(user), Is.EqualTo(todaySyns));
         }
 
-
-        protected abstract ISynsStore SynsStore(User use, decimal todaySyns);
+        protected abstract ISynsStore SynsStore();
     }
 }
