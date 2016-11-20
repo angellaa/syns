@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureBlobSynsStoreTests.cs" />
     <Compile Include="InMemoryContractsTests\InMemoryUserServiceTests.cs" />
     <Compile Include="InMemoryContractsTests\InMemorySynsStoreTests.cs" />
     <Compile Include="InMemoryContracts\InMemorySynsStore.cs" />
@@ -58,9 +59,14 @@
     <Compile Include="ApplicationTodaySynsTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AzureBlobSynsStore\AzureBlobSynsStore.csproj">
+      <Project>{E86C2A79-86F8-4059-9A3D-B1B5E2E5A937}</Project>
+      <Name>AzureBlobSynsStore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Syns\Syns.csproj">
       <Project>{A57BDA04-8AAC-4074-8548-402E822B4358}</Project>
       <Name>Syns</Name>
