@@ -22,6 +22,11 @@ namespace Syns.Tests.InMemoryContracts
 
         public void AddUser(string username, string password)
         {
+            if (users.Keys.Contains(username))
+            {
+                throw new UserServiceException($"The user {username} already exist.");    
+            }
+            
             users.Add(username, password);
         }
 

@@ -37,7 +37,16 @@ namespace Syns.Tests.ContractTests
             Assert.IsNull(userService.GetLoggedUser());
         }
 
-        private  IUserService ServiceWithUser(string username, string password)
+        [Test]
+        public void AddUserThatAlreadyExist()
+        {
+            IUserService userService = CreateUserService();
+            userService.AddUser("user", "password");
+
+            Assert.Throws<UserServiceException>(() => userService.AddUser("user", "password"));
+        }
+
+        private IUserService ServiceWithUser(string username, string password)
         {
             var authentication = CreateUserService();
             authentication.AddUser(username, password);
