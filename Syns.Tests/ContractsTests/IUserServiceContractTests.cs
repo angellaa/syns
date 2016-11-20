@@ -10,7 +10,7 @@ namespace Syns.Tests.ContractTests
         [Test]
         public void SuccessfulLogin()
         {
-            IUserService userService = ServiceWithUser(Username, Password);
+            IUserService userService = ServiceWithUser();
 
             Assert.IsTrue(userService.Login(Username, Password));
             Assert.That(userService.GetLoggedUser(), Is.EqualTo(new User(Username)));
@@ -19,7 +19,7 @@ namespace Syns.Tests.ContractTests
         [Test]
         public void Logout()
         {
-            IUserService userService = ServiceWithUser(Username, Password);
+            IUserService userService = ServiceWithUser();
 
             userService.Login(Username, Password);
             userService.Logout();
@@ -50,7 +50,7 @@ namespace Syns.Tests.ContractTests
         [Test]
         public void RegisterUserThatAlreadyExist()
         {
-            IUserService userService = ServiceWithUser(Username, Password);
+            IUserService userService = ServiceWithUser();
 
             Assert.Throws<UserServiceException>(() => userService.RegisterUser(Username, Password));
         }
@@ -59,7 +59,7 @@ namespace Syns.Tests.ContractTests
         public void SaveUser()
         {
             // Arrange
-            IUserService userService = ServiceWithUser(Username, Password);
+            IUserService userService = ServiceWithUser();
             userService.Login(Username, Password);
 
             var user = userService.GetLoggedUser();
@@ -72,16 +72,27 @@ namespace Syns.Tests.ContractTests
             AssertUserAreEqual(user, userService.GetLoggedUser());
         }
 
+        [Test]
+        public void FailedLoginPreserveCurrentLoggedUser()
+        {
+            IUserService userService = ServiceWithUser();
+            userService.Login(Username, Password);
+
+            userService.Login("Different " + Username, Password);
+
+            Assert.That(userService.GetLoggedUser(), Is.EqualTo(new User(Username)));
+        }
+
         private void AssertUserAreEqual(User expected, User actual)
         {
             Assert.That(actual, Is.EqualTo(expected));
             Assert.That(actual.SynsAllowance, Is.EqualTo(expected.SynsAllowance));
         }
 
-        private IUserService ServiceWithUser(string username, string password)
+        private IUserService ServiceWithUser()
         {
             var userService = CreateUserService();
-            userService.RegisterUser(username, password);
+            userService.RegisterUser(Username, Password);
 
             return userService;
         }
