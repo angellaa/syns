@@ -60,5 +60,31 @@ namespace Syns.Tests
             // Assert
             Assert.That(application.TodaySynsLeft, Is.EqualTo(synsLeft));
         }
+
+        [Test]
+        public void AddSyns()
+        {
+            // Arrange
+            var user = new User("user");
+
+            var userService = Substitute.For<IUserService>();
+            userService
+                .GetLoggedUser()
+                .Returns(user);
+
+            var todaySyns = 5.5m;
+
+            var synsStore = Substitute.For<ISynsStore>();
+            synsStore
+                .GetTodaySyns(user)
+                .Returns(todaySyns);
+
+            // Act
+            var application = new Application(userService, synsStore);
+            application.AddSyns(1);
+
+            // Assert
+            synsStore.Received(1).SetTodaySyns(user, 6.5m);
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace Syns
+﻿namespace Syns
 {
     public class Application
     {
@@ -27,6 +26,14 @@ namespace Syns
         private User LoggedUser()
         {
             return m_UserService.GetLoggedUser();
+        }
+
+        public void AddSyns(decimal syns)
+        {
+            var loggedUser = LoggedUser();
+            var newSyns = TodaySyns() + syns;
+
+            m_SynsStore.SetTodaySyns(loggedUser, newSyns);
         }
     }
 }
