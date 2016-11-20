@@ -5,28 +5,9 @@ namespace Syns.Tests.InMemoryContractsTests
 {
     public class InMemoryUserServiceTests : IUserServiceContractTests
     {
-        protected override IUserService ServiceWithUser(string username, string password)
+        protected override IUserService CreateUserService()
         {
-            var authentication = new InMemoryUserService();
-            authentication.AddUser(username, password);
-
-            return authentication;
-        }
-
-        protected override IUserService ServiceWithoutUser(string username)
-        {
-            var authentication = new InMemoryUserService();
-            authentication.AddUser("Different " + username, "irrelevant passowrd");
-
-            return authentication;
-        }
-
-        protected override IUserService ServiceWithUserButDifferentPassword(string username, string password)
-        {
-            var authentication = new InMemoryUserService();
-            authentication.AddUser(username, "Different " + password);
-
-            return authentication;
+            return new InMemoryUserService();
         }
     }
 }
