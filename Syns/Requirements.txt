@@ -4,11 +4,11 @@
 
 DONE:
  - I want to track of how many syns I used today
+ - I want to know how many syns I have left today
 
 MUST: 
 
- - I want to say what is my syns allowance per day
- - I want to know how many syns I have left today
+ - I want to set what is my syns allowance per day
  - I want to add/remove syns to my count today
  - I want to add/remove syns to the counter of a previous day
  - I want all my data to be secure (no one else should be able to read it except me)

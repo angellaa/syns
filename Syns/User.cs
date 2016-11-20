@@ -11,6 +11,8 @@ namespace Syns
             m_Username = username;
         }
 
+        public decimal SynsAllowance { get; set; }
+
         public bool Equals(User other)
         {
             if (other == null) return false;

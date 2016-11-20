@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Syns
 {
     public class Application
@@ -7,7 +6,6 @@ namespace Syns
         private readonly IAuthentication m_Authentication;
         private readonly ISynsStore m_SynsStore;
         private User m_LoggedUser;
-        private decimal m_SynsAllowance;
 
         public Application(IAuthentication authentication, ISynsStore synsStore)
         {
@@ -30,14 +28,9 @@ namespace Syns
             return m_SynsStore.GetTodaySyns(m_LoggedUser);
         }
 
-        public void SetSynsAllowance(decimal synsAllowance)
-        {
-            m_SynsAllowance = synsAllowance;
-        }
-
         public decimal TodaySynsLeft()
         {
-            var synsLeft = m_SynsAllowance - TodaySyns();
+            var synsLeft = m_LoggedUser.SynsAllowance - TodaySyns();
 
             return synsLeft > 0 ? synsLeft : 0;
         }

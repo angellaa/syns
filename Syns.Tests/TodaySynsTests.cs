@@ -44,7 +44,11 @@ namespace Syns.Tests
             // Arrange
             var username = "username@me.com";
             var password = "password";
-            var user = new User(username);
+
+            var user = new User(username)
+            {
+                SynsAllowance = synsAllowance
+            };
 
             var authentication = Substitute.For<IAuthentication>();
             authentication
@@ -59,7 +63,6 @@ namespace Syns.Tests
             // Act
             var application = new Application(authentication, synsStore);
             application.Login(username, password);
-            application.SetSynsAllowance(synsAllowance);
 
             // Assert
             Assert.That(application.TodaySynsLeft, Is.EqualTo(synsLeft));
