@@ -5,18 +5,18 @@ namespace Syns.Tests.InMemoryContracts
 {
     public class InMemoryUserService : IUserService
     {
-        private readonly Dictionary<string, UserWithPassword> users = new Dictionary<string, UserWithPassword>();
-        private User m_LoggedUser;
+        private readonly Dictionary<string, UserWithPassword> savedUsers = new Dictionary<string, UserWithPassword>();
+        private string m_LoggedUserName;
 
         public void Login(string username, string password)
         {
-            if (UserExists(username) && users[username].Password == password)
+            if (UserExists(username) && savedUsers[username].Password == password)
             {
-                m_LoggedUser = users[username].User;
+                m_LoggedUserName = username;
             }
             else
             {
-               m_LoggedUser = null;
+                m_LoggedUserName = null;
             }
         }
 
@@ -33,25 +33,38 @@ namespace Syns.Tests.InMemoryContracts
                                        Password = password
                                    };
 
-            users.Add(username, userWithPassword);
+            savedUsers.Add(username, userWithPassword);
         }
 
         public User GetLoggedUser()
         {
-            return m_LoggedUser;
+            if (m_LoggedUserName == null)
+            {
+                return null;
+            }
+
+            return CloneUser(savedUsers[m_LoggedUserName].User);
         }
 
         public void SaveUser(User user)
         {
             if (UserExists(user.Username))
             {
-                users[user.Username].User = user;
+                savedUsers[user.Username].User = user;
             }            
         }
 
         private bool UserExists(string username)
         {
-            return users.Keys.Contains(username);
+            return savedUsers.Keys.Contains(username);
+        }
+
+        private static User CloneUser(User user)
+        {
+            return new User(user.Username)
+            {
+                SynsAllowance = user.SynsAllowance
+            };
         }
 
         private class UserWithPassword

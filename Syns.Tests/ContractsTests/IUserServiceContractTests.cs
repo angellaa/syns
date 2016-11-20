@@ -8,7 +8,7 @@ namespace Syns.Tests.ContractTests
         private const string Password = "password";
 
         [Test]
-        public void Success()
+        public void SuccessfulLogin()
         {
             IUserService userService = ServiceWithUser(Username, Password);
 
@@ -18,9 +18,10 @@ namespace Syns.Tests.ContractTests
         }
 
         [Test]
-        public void UserDoesNotExist()
+        public void LoginWhenUserDoesNotExist()
         {
-            IUserService userService = ServiceWithoutUser(Username);
+            IUserService userService = CreateUserService();
+            userService.AddUser("Different " + Username, "irrelevant passowrd");
 
             userService.Login(Username, Password);
 
@@ -28,9 +29,10 @@ namespace Syns.Tests.ContractTests
         }
 
         [Test]
-        public void UserExistButPasswordIsWrong()
+        public void LoginWithWrongPassword()
         {
-            IUserService userService = ServiceWithUserButDifferentPassword(Username, Password);
+            IUserService userService = CreateUserService();
+            userService.AddUser(Username, "Different " + Password);
 
             userService.Login(Username, Password);
 
@@ -48,15 +50,17 @@ namespace Syns.Tests.ContractTests
         [Test]
         public void SaveUser()
         {
+            // Arrange
             IUserService userService = ServiceWithUser(Username, Password);
-
             userService.Login(Username, Password);
 
             var user = userService.GetLoggedUser();
             user.SynsAllowance = 15m;
-
-            userService.Login(Username, Password);
-
+            
+            // Act
+            userService.SaveUser(user);
+            
+            // Assert
             AssertUserAreEqual(user, userService.GetLoggedUser());
         }
 
@@ -68,26 +72,10 @@ namespace Syns.Tests.ContractTests
 
         private IUserService ServiceWithUser(string username, string password)
         {
-            var authentication = CreateUserService();
-            authentication.AddUser(username, password);
+            var userService = CreateUserService();
+            userService.AddUser(username, password);
 
-            return authentication;
-        }
-
-        private IUserService ServiceWithoutUser(string username)
-        {
-            var authentication = CreateUserService();
-            authentication.AddUser("Different " + username, "irrelevant passowrd");
-
-            return authentication;
-        }
-
-        private IUserService ServiceWithUserButDifferentPassword(string username, string password)
-        {
-            var authentication = CreateUserService();
-            authentication.AddUser(username, "Different " + password);
-
-            return authentication;
+            return userService;
         }
 
         protected abstract IUserService CreateUserService();
